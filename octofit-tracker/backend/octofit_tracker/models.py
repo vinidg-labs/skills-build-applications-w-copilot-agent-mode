@@ -14,12 +14,13 @@ class Team(models.Model):
         return self.name
 
 class Activity(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.CharField(max_length=100)  # Armazena o id do usuário como string
+    user_name = models.CharField(max_length=100)  # Redundância para facilitar queries
     type = models.CharField(max_length=50)
     duration = models.PositiveIntegerField()
     date = models.DateField()
     def __str__(self):
-        return f"{self.user.name} - {self.type}"
+        return f"{self.user_name} - {self.type}"
 
 class Workout(models.Model):
     name = models.CharField(max_length=100)
@@ -29,8 +30,9 @@ class Workout(models.Model):
         return self.name
 
 class Leaderboard(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.CharField(max_length=100)
+    user_name = models.CharField(max_length=100)
     points = models.PositiveIntegerField()
     rank = models.PositiveIntegerField()
     def __str__(self):
-        return f"{self.user.name} - {self.rank}"
+        return f"{self.user_name} - {self.rank}"
