@@ -6,8 +6,11 @@ const Leaderboard = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState(null);
-  const endpoint = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`;
-
+  const codespaceName = process.env.REACT_APP_CODESPACE_NAME;  
+  const baseUrl = codespaceName  
+    ? `https://${codespaceName}-8000.app.github.dev`  
+    : 'http://localhost:8000';  
+  const endpoint = `${baseUrl}/api/leaderboard/`;  
   useEffect(() => {
     console.log('Fetching Leaderboard from:', endpoint);
     fetch(endpoint)

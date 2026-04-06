@@ -15,7 +15,13 @@ class TeamModelTest(TestCase):
 class ActivityModelTest(TestCase):
     def test_create_activity(self):
         user = User.objects.create(name='Test User', email='test2@example.com', team='dc')
-        activity = Activity.objects.create(user=user, type='run', duration=30, date='2024-01-01')
+        activity = Activity.objects.create(  
+            user_id=user.id,  
+            user_name=user.name,  
+            type='run',  
+            duration=30,  
+            date='2024-01-01'  
+        )
         self.assertEqual(activity.type, 'run')
 
 class WorkoutModelTest(TestCase):
@@ -26,5 +32,5 @@ class WorkoutModelTest(TestCase):
 class LeaderboardModelTest(TestCase):
     def test_create_leaderboard(self):
         user = User.objects.create(name='Test User', email='test3@example.com', team='marvel')
-        lb = Leaderboard.objects.create(user=user, points=100, rank=1)
+        lb = Leaderboard.objects.create(user_id=user.id, user_name=user.name, points=100, rank=1)
         self.assertEqual(lb.rank, 1)

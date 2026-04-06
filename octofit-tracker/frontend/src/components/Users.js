@@ -6,7 +6,11 @@ const Users = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState(null);
-  const endpoint = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/users/`;
+  const codespaceName = process.env.REACT_APP_CODESPACE_NAME;  
+  const baseUrl = codespaceName  
+    ? `https://${codespaceName}-8000.app.github.dev`  
+    : 'http://localhost:8000';  
+  const endpoint = `${baseUrl}/api/users/`;
 
   useEffect(() => {
     console.log('Fetching Users from:', endpoint);

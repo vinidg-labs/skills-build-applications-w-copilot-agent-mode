@@ -6,7 +6,11 @@ const Teams = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState(null);
-  const endpoint = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/teams/`;
+  const codespaceName = process.env.REACT_APP_CODESPACE_NAME;  
+  const baseUrl = codespaceName  
+    ? `https://${codespaceName}-8000.app.github.dev`  
+    : 'http://localhost:8000';  
+  const endpoint = `${baseUrl}/api/teams/`;
 
   useEffect(() => {
     console.log('Fetching Teams from:', endpoint);
